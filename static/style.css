@@ -1,0 +1,70 @@
+body.cyber-bg {
+    margin: 0;
+    padding: 0;
+    background: #000; 
+    font-family: 'Consolas', monospace;
+    color: #0f0;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 1.8em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #0fa; 
+}
+
+.form-container, .result-container {
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: rgba(0, 255, 153, 0.05);
+    padding: 20px;
+    border: 1px solid #0f0;
+    border-radius: 10px;
+    margin-top: 40px;
+}
+
+.cyber-form label {
+    display: inline-block;
+    width: 220px;
+}
+
+.cyber-form input, 
+.cyber-form select,
+.cyber-form button {
+    background-color: #002f2f;
+    color: #0f0;
+    border: 1px solid #0f0;
+    border-radius: 5px;
+    padding: 4px 6px;
+    font-family: 'Consolas', monospace;
+}
+
+.cyber-form button:hover {
+    background-color: #00a;
+    color: #fff;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.score-high {
+    color: #f33;
+    font-weight: bold;
+}
+.score-mid {
+    color: #fa0;
+    font-weight: bold;
+}
+.score-low {
+    color: #ff0;
+    font-weight: bold;
+}
+.score-none {
+    color: #0f0;
+    font-weight: bold;
+}
