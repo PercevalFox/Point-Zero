@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Résultat - Point Zero </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="cyber-bg">
+    <h1>Point Zero - Résultat de la Simulation Avancée</h1>
+    <div class="result-container">
+        <p>Type de Bombe : <strong>{{ bomb_type }}</strong></p>
+        <p>Puissance : <strong>{{ bomb_megatons }} MT</strong> ({{ bomb_kilotons }} KT)</p>
+        <p>Cible : <strong>{{ bomb_coords[0] }}, {{ bomb_coords[1] }}</strong>, altitude ~ {{ alt_target }} m</p>
+        <p>Vous : <strong>{{ user_coords[0] }}, {{ user_coords[1] }}</strong>, altitude ~ {{ alt_user }} m</p>
+        <p>Distance : <strong>{{ distance_km }} km</strong></p>
+        <p>Topographie : <strong>{{ terrain_type }}</strong></p>
+
+        <h2>Rayons d'effets (km)</h2>
+        <ul>
+            <li>Fireball : {{ zones.fireball }} km</li>
+            <li>Blast : {{ zones.blast }} km</li>
+            <li>Thermal : {{ zones.thermal }} km</li>
+            <li>Fallout : {{ zones.fallout }} km</li>
+        </ul>
+
+        <h2>Score de Létalité</h2>
+        {% if lethal_score == 100 %}
+        <p class="score-high">100% - Boule de feu totale. Aucune chance de survie.</p>
+        {% elif lethal_score == 80 %}
+        <p class="score-high">80% - Zone d'onde de choc massive, risque extrême.</p>
+        {% elif lethal_score == 50 %}
+        <p class="score-mid">50% - Radiation thermique sévère, danger très élevé.</p>
+        {% elif lethal_score == 15 %}
+        <p class="score-low">15% - Retombées radioactives. Danger important.</p>
+        {% else %}
+        <p class="score-none">0% - Hors des principales zones létales (approx.).</p>
+        {% endif %}
+
+        <br>
+        <a href="/">Refaire un calcul</a>
+    </div>
+</body>
+</html>
