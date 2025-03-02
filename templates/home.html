@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Point Zero - Simulateurs de bombardement</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.webp') }}">
 </head>
 <body class="cyber-bg">
     <h1>Simulateur de bombardement - Point Zero</h1>
@@ -28,10 +29,7 @@
             <label for="selected_target">Ville-cible (France) :</label>
             <select name="selected_target" id="selected_target" onchange="updateAltitude()">
                 {% for city_info in target_cities %}
-                <option 
-                  value="{{ loop.index0 }}" 
-                  data-alt="{{ city_info[3] }}"
-                >
+                <option value="{{ loop.index0 }}" data-alt="{{ city_info[3] }}">
                   {{ city_info[0] }}
                 </option>
                 {% endfor %}
@@ -74,17 +72,29 @@
         </form>
     </div>
 
-    <!-- SCRIPT pour remplir automatiquement alt_target suivant la ville cible dans le app.py-->
+    <!-- Script pour remplir automatiquement alt_target suivant la ville sélectionnée -->
     <script>
         function updateAltitude() {
             var select = document.getElementById("selected_target");
             var altInput = document.getElementById("alt_target");
-            
             var selectedOption = select.options[select.selectedIndex];
             var altitude = selectedOption.getAttribute("data-alt");
-            
             altInput.value = altitude;
         }
     </script>
+
+    <!-- compteur visiteurs + lien -->
+    <footer class="site-footer">
+        <div class="visitor-counter">
+            <p>Visiteurs : <span id="visitor-count">0</span></p>
+        </div>
+        <div class="github-link">
+            <p>Codé avec humour (et une pointe de stress quand même) par 
+                <a href="https://github.com/PercevalFox/Point-Zero" target="_blank">PercevalFox</a>
+            </p>
+        </div>
+    </footer>
+    
+    <script src="{{ url_for('static', filename='visitor_count.js') }}"></script>
 </body>
 </html>
