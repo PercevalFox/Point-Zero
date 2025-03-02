@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Point Zero - Simulateurs de bombardement</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="cyber-bg">
+    <h1>Simulateur de bombardement - Point Zero</h1>
+    <div class="form-container">
+        <form method="POST" class="cyber-form">
+            
+            <!-- Type de bombe -->
+            <label for="bomb_type">Type de bombe :</label>
+            <select name="bomb_type" id="bomb_type">
+                {% for tkey, tval in bomb_types.items() %}
+                <option value="{{ tkey }}">{{ tkey }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+
+            <!-- Puissance en MT -->
+            <label for="bomb_megatons">Puissance (MT) :</label>
+            <input type="number" step="0.1" name="bomb_megatons" id="bomb_megatons" value="1.0">
+            <br><br>
+
+            <!-- Ville cible -->
+            <label for="selected_target">Ville-cible (France) :</label>
+            <select name="selected_target" id="selected_target" onchange="updateAltitude()">
+                {% for city_info in target_cities %}
+                <option 
+                  value="{{ loop.index0 }}" 
+                  data-alt="{{ city_info[3] }}"
+                >
+                  {{ city_info[0] }}
+                </option>
+                {% endfor %}
+            </select>
+            <br><br>
+
+            <!-- Altitude approx de la cible -->
+            <label for="alt_target">Altitude de la cible (m) :</label>
+            <input type="number" name="alt_target" id="alt_target" value="35">
+            <br><br>
+
+            <hr>
+
+            <!-- Localisation utilisateur -->
+            <label for="user_city_name">Votre ville (France) :</label>
+            <input type="text" name="user_city_name" id="user_city_name" placeholder="Ex: Grenoble">
+            <small>(géolocalisation auto)</small>
+            <br><br>
+
+            <!-- Type de terrain -->
+            <label for="terrain_type">Topographie :</label>
+            <select name="terrain_type" id="terrain_type">
+            {% for tname, tf in terrain_factors.items() %}
+            <option value="{{ tname }}">{{ tname }}</option>
+            {% endfor %}
+            </select>
+            <br><br>
+
+            <!-- Ou coordonnées manuelles -->
+            <label for="user_coords">Ou vos coordonnées (lat, lon) :</label>
+            <input type="text" name="user_coords" id="user_coords" placeholder="45.18,5.72">
+            <br><br>
+
+            <!-- Altitude utilisateur -->
+            <label for="alt_user">Votre altitude (m) :</label>
+            <input type="number" name="alt_user" id="alt_user" value="0">
+            <br><br>
+
+            <button type="submit">Calculer</button>
+        </form>
+    </div>
+
+    <!-- SCRIPT pour remplir automatiquement alt_target suivant la ville cible dans le app.py-->
+    <script>
+        function updateAltitude() {
+            var select = document.getElementById("selected_target");
+            var altInput = document.getElementById("alt_target");
+            
+            var selectedOption = select.options[select.selectedIndex];
+            var altitude = selectedOption.getAttribute("data-alt");
+            
+            altInput.value = altitude;
+        }
+    </script>
+</body>
+</html>
